@@ -67,5 +67,5 @@ Known issues
 - in case of conflict hard to resolve please contact your SafeHouse representative
     
   
-  
+  ![test](https://github.com/mariotavor/safeHouseSdkExampleCode/blob/master/Screen%20Shot%202020-01-23%20at%2018.11.38.png)
   
