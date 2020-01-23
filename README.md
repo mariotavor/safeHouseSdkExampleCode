@@ -29,6 +29,8 @@ Than, open it in Android Studio and follow the example code in the main activity
 Then, go through the following steps in order to get the example working
 (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
+0. take the sdk the resides inside the libs/ folder in the example code
+
 1. Android manifest: add the following **in case of xml merging errors**:
 
   tools:replace="android:allowBackup,android:icon,android:label,android:theme"
@@ -36,6 +38,14 @@ Then, go through the following steps in order to get the example working
 2. module build.gradle
 add the following dependencies:
 
+dependencies {
+//under libs folder we will put the sdk as an aar library
+implementation fileTree(dir: 'libs', include: ['*.jar,*.aar'])
+
+//add the dependency to the safehouseLib-release@aar
+ implementation(':safehouseLib-release@aar'){transitive=true}
+
+//add the dependencies below (temporary and will be remove shortly)
 implementation("androidx.appcompat:appcompat:1.1.0")
 implementation("androidx.annotation:annotation:1.1.0'")
 implementation("androidx.cardview:cardview:1.0.0")
