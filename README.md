@@ -25,11 +25,11 @@ Getting Started
 
 Go through the following steps in order to get the example working (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
-1 Android manifest: add the following in case of xml merging errors:
+- Android manifest: add the following in case of xml merging errors:
 
   **tools:replace="android:allowBackup,android:icon,android:label,android:theme"**
 
-2 module build.gradle
+- module build.gradle
 add the following dependencies:
 
 implementation("androidx.appcompat:appcompat:1.1.0")
@@ -46,7 +46,7 @@ implementation("com.google.firebase:firebase-analytics:17.2.2")
 implementation("com.jakewharton.timber:timber:4.7.1")
 implementation("com.google.firebase:firebase-messaging:20.1.0")
 
-3) in the activity add the xml to the layout and call the following member methods:
+- in the activity add the xml to the layout and call the following member methods:
 
 //get the view
    mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
@@ -55,12 +55,12 @@ implementation("com.google.firebase:firebase-messaging:20.1.0")
    
    vpn status will appear as text on the button itself.
 
-4) click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
+- click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
 
 Known issues
 ------------
-1) xml merging issues may appear as shown above
-2) in case of conflict hard to resolve please contact your SafeHouse representative
+- xml merging issues may appear as shown above
+- in case of conflict hard to resolve please contact your SafeHouse representative
     
   
   
