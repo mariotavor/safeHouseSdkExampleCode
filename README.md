@@ -1,44 +1,67 @@
-Basic Location Sample (Java)
-============================
+safeHouse sdk library version 1.25
+==================================
 
-Demonstrates use of the Google Play services Location API to retrieve the last
-known location for a device.
+Demonstrates the integration of the SafeHouse service through the usage of SafeHouse sdk library.
+
 
 Introduction
 ============
 
-This sample shows a simple way of getting a device's last known location, which
-is usually equivalent to the device's current location.
-The accuracy of the location returned is based on the location
-permissions you've requested and the location sensors that are currently active
-for the device.
+This sample shows a simple way of getting a secure vpn connection, by using a dedicated safehouse widget.
+The SafeHouseConnectionButton is easily used by integrating the button into an app's xml layout.
+Through simple steps, the service can be integrated.
 
-To run this sample, **location must be enabled**.
+Permissions for the Vpn will be requested upon tapping the connect button.
 
-This sample uses [FusedLocationProviderClient](https://developer.android.com/reference/com/google/android/gms/location/LocationServices.html).
+To run this sample, **internet connection must be available**.
 
-Also see the [Kotlin version](../kotlin) of this sample.
 
 Prerequisites
 --------------
-
-- Android API Level >v9
-- Android Build Tools >v21
-- Google Support Repository
+- Android API Level >v19
 
 Getting Started
 ---------------
 
-This sample uses the Gradle build system. To build this project, use the
-"gradlew build" command or use "Import Project" in Android Studio.
+Go through the following steps in order to get the example working (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
-Support
--------
+1) Android manifest: add the following in case of xml merging errors:
 
-- Stack Overflow: http://stackoverflow.com/questions/tagged/google-play-services
+  **tools:replace="android:allowBackup,android:icon,android:label,android:theme"**
 
-If you've found an error in this sample, please file an issue:
-https://github.com/android/location-samples/issues
+2) module build.gradle
+add the following dependencies:
 
-Patches are encouraged, and may be submitted according to the instructions in
-CONTRIBUTING.md.
+implementation("androidx.appcompat:appcompat:1.1.0")
+implementation("androidx.annotation:annotation:1.1.0'")
+implementation("androidx.cardview:cardview:1.0.0")
+implementation("com.github.PhilJay:MPAndroidChart:v3.0.2")
+implementation("com.contrarywind:Android-PickerView:4.1.8")
+implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+implementation("com.airbnb.android:lottie:3.0.7")
+implementation("com.mixpanel.android:mixpanel-android:5.+")
+implementation("androidx.core:core-ktx:+")
+implementation("com.android.billingclient:billing:2.0.3")
+implementation("com.google.firebase:firebase-analytics:17.2.2")
+implementation("com.jakewharton.timber:timber:4.7.1")
+implementation("com.google.firebase:firebase-messaging:20.1.0")
+
+3) in the activity add the xml to the layout and call the following member methods:
+
+//get the view
+   mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
+   // set the vpn credentials
+   mSafeHouseConnectionButtonId.setCredentials("test","xxxx");
+   
+   vpn status will appear as text on the button itself.
+
+4) click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
+
+Known issues
+------------
+1) xml merging issues may appear as shown above
+2) in case of conflict hard to resolve please contact your SafeHouse representative
+    
+  
+  
+  
