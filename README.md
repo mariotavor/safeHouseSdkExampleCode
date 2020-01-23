@@ -25,11 +25,11 @@ Getting Started
 
 Go through the following steps in order to get the example working (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
-1) Android manifest: add the following in case of xml merging errors:
+1 Android manifest: add the following in case of xml merging errors:
 
   **tools:replace="android:allowBackup,android:icon,android:label,android:theme"**
 
-2) module build.gradle
+2 module build.gradle
 add the following dependencies:
 
 implementation("androidx.appcompat:appcompat:1.1.0")
