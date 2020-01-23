@@ -23,13 +23,17 @@ Prerequisites
 Getting Started
 ---------------
 
-Go through the following steps in order to get the example working (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
+First and foremost, download this git repo example code.
+Than, open it in Android Studio and follow the example code in the main activity.
 
-- Android manifest: add the following in case of xml merging errors:
+Then, go through the following steps in order to get the example working
+(Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
-  **tools:replace="android:allowBackup,android:icon,android:label,android:theme"**
+1. Android manifest: add the following **in case of xml merging errors**:
 
-- module build.gradle
+  tools:replace="android:allowBackup,android:icon,android:label,android:theme"
+
+2. module build.gradle
 add the following dependencies:
 
 implementation("androidx.appcompat:appcompat:1.1.0")
@@ -46,16 +50,16 @@ implementation("com.google.firebase:firebase-analytics:17.2.2")
 implementation("com.jakewharton.timber:timber:4.7.1")
 implementation("com.google.firebase:firebase-messaging:20.1.0")
 
-- in the activity add the xml to the layout and call the following member methods:
+3. in the activity add the xml to the layout and call the following member methods:
 
 //get the view
-   mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
-   // set the vpn credentials
-   mSafeHouseConnectionButtonId.setCredentials("test","xxxx");
+mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
+// set the vpn credentials
+mSafeHouseConnectionButtonId.setCredentials("test","xxxx");
    
-   vpn status will appear as text on the button itself.
+Vpn status will appear as text on the button itself.
 
-- click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
+4. click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
 
 Known issues
 ------------
