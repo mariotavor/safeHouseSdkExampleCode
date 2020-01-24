@@ -49,23 +49,16 @@ implementation fileTree(dir: 'libs', include: ['*.jar,*.aar'])
 implementation("androidx.appcompat:appcompat:1.1.0")
 implementation("androidx.annotation:annotation:1.1.0'")
 implementation("androidx.cardview:cardview:1.0.0")
-implementation("com.github.PhilJay:MPAndroidChart:v3.0.2")
-implementation("com.contrarywind:Android-PickerView:4.1.8")
 implementation("androidx.constraintlayout:constraintlayout:1.1.3")
-implementation("com.airbnb.android:lottie:3.0.7")
-implementation("com.mixpanel.android:mixpanel-android:5.+")
 implementation("androidx.core:core-ktx:+")
-implementation("com.android.billingclient:billing:2.0.3")
-implementation("com.google.firebase:firebase-analytics:17.2.2")
 implementation("com.jakewharton.timber:timber:4.7.1")
 implementation("com.google.firebase:firebase-messaging:20.1.0")
+
 
 3. in the activity add the xml to the layout and call the following member methods:
 
 //get the view
 mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
-// set the vpn credentials
-mSafeHouseConnectionButtonId.setCredentials("test","xxxx");
    
 Vpn status will appear as text on the button itself.
 
