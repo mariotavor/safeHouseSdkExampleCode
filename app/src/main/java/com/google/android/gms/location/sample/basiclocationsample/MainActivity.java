@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
+        mSafeHouseConnectionButtonId.getAllAvailableServerLocation();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
