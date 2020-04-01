@@ -66,7 +66,7 @@ Vpn status will appear as text on the button itself.
 //This method is used to find all available country
  mSafeHouseConnectionButtonId.getAllAvailableServerLocation(); 
  
- //This method is used to o pass the user selection to the sdk.
+ //This method is used to pass the user selection to the sdk.
  mSafeHouseConnectionButtonId.setAvailableLocation( mSafeHouseConnectionButtonId.getAllAvailableServerLocation().get(0));
  
 
