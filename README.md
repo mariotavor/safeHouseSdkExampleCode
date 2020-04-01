@@ -82,6 +82,4 @@ Screenshot
 ----------
 
 ![2020-04-01](https://user-images.githubusercontent.com/27682184/78152594-a6f0d800-7457-11ea-81f9-dbba94163788.jpg)
-
-  ![test](https://github.com/mariotavor/safeHouseSdkExampleCode/blob/master/Screen%20Shot%202020-01-23%20at%2018.11.38.png)
   
