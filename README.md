@@ -43,7 +43,7 @@ dependencies {
 implementation fileTree(dir: 'libs', include: ['*.jar,*.aar'])
 
 //add the dependency to the safehouseLib-release@aar
- implementation(':safehouseLib-release@aar'){transitive=true}
+ implementation(':safehouseLib-release_latest@aar'){transitive=true}
 
 //add the dependencies below (temporary and will be remove shortly)
 implementation("androidx.appcompat:appcompat:1.1.0")
@@ -53,6 +53,7 @@ implementation("androidx.constraintlayout:constraintlayout:1.1.3")
 implementation("androidx.core:core-ktx:+")
 implementation("com.jakewharton.timber:timber:4.7.1")
 implementation("com.google.firebase:firebase-messaging:20.1.0")
+implementation("com.contrarywind:Android-PickerView:4.1.8")
 
 
 3. in the activity add the xml to the layout and call the following member methods:
@@ -61,6 +62,14 @@ implementation("com.google.firebase:firebase-messaging:20.1.0")
 mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
    
 Vpn status will appear as text on the button itself.
+
+//This method is used to find all available country
+ mSafeHouseConnectionButtonId.getAllAvailableServerLocation(); 
+ 
+ //This method is used to o pass the user selection to the sdk.
+ mSafeHouseConnectionButtonId.setAvailableLocation( mSafeHouseConnectionButtonId.getAllAvailableServerLocation().get(0));
+ 
+
 
 4. click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
 
