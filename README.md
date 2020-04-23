@@ -34,8 +34,10 @@ Then, go through the following steps in order to get the example working
 1. Android manifest: add the following 
 
   1.tools:replace="android:allowBackup,android:icon,android:label,android:theme" (**in case of xml merging errors**:)
+  
   2.Add the following permision:
-   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  
+   uses-permission android:name="android.permission.FOREGROUND_SERVICE"
 
 2. module build.gradle
 add the following dependencies:
