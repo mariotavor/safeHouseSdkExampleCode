@@ -60,22 +60,42 @@ implementation("com.google.firebase:firebase-messaging:20.1.0")
 implementation("com.contrarywind:Android-PickerView:4.1.8")
 
 
-3. in the activity add the xml to the layout and call the following member methods:
+3. To access VPN feature, please follow the below mentioned steps:
 
-//get the view
-mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
+  //Initialise SafeHouseConnectionButton object.
+  
+  SafeHouseConnectionButton safeHouseConnectionButton = new SafeHouseConnectionButton(context);
+  
+  //Register callback to recieve VPN status
+  
+  safeHouseConnectionButton.registerToSafeHouseVpnStatus(SafeHouseConnectionCallbacks). After this you will find runtime VPN     Connection status like LEVEL_CONNECTED, LEVEL_NOTCONNECTED and so on. 
+  
+  //This method is used to find all available country
+  
+   getAllAvailableServerLocation();
+
+  //This method is used to pass the user selection location to the sdk.
+  
+   setAvailableLocation(getAllAvailableServerLocation().get(0));
    
-Vpn status will appear as text on the button itself.
+   Note: It's necessay to pass any location before start VPN connection.
+   
+   //Check if VPN is alreadyConnected
+   
+   isVPNConnected()
+   
+   //To connect VPN
 
-//This method is used to find all available country
- mSafeHouseConnectionButtonId.getAllAvailableServerLocation(); 
- 
- //This method is used to pass the user selection to the sdk.
- mSafeHouseConnectionButtonId.setAvailableLocation( mSafeHouseConnectionButtonId.getAllAvailableServerLocation().get(0));
- 
-
-
-4. click to connect to the vpn tunnel and another click will disconnect the vpn tunnel
+   connectToVPN()
+   
+   //To disconnect VPN
+   
+   disconnectVPNConnection()
+   
+   // To retry
+   
+   retryConnection()
+  
 
 Known issues
 ------------
