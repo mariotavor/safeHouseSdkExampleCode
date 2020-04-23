@@ -79,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
         mLatitudeText = (TextView) findViewById((R.id.latitude_text));
         mLongitudeText = (TextView) findViewById((R.id.longitude_text));
 
-
-        mSafeHouseConnectionButtonId = findViewById(R.id.safeHouseConnectionButtonId);
-        mSafeHouseConnectionButtonId.getAllAvailableServerLocation();
+        mSafeHouseConnectionButtonId = new SafeHouseConnectionButton(MainActivity.this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
