@@ -1,2 +1,2 @@
-include ':app'
+include ':test'
 rootProject.name = 'BasicLocationSample Java'

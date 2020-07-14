@@ -1,26 +1,123 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    apply from: rootProject.file('dependencies.gradle')
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath deps.gradle_plugin.android
+        classpath deps.gradle_plugin.detekt
+        classpath deps.gradle_plugin.kotlin
+        classpath deps.gradle_plugin.spotless
     }
 }
 
-allprojects {
+plugins {
+    id 'com.github.ben-manes.versions' version '0.27.0'
+    id 'com.savvasdalkitsis.module-dependency-graph' version '0.3'
+}
+
+subprojects {
+    apply from: rootProject.file('dependencies.gradle')
+    apply from: rootProject.file('spotless.gradle')
+    apply plugin: 'io.gitlab.arturbosch.detekt'
 
     repositories {
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
-        flatDir{
-            dirs 'libs'
+    }
+
+    pluginManager.withPlugin('kotlin-android') {
+        dependencies {
+            implementation deps.kotlin.stdlib8
         }
     }
+
+    pluginManager.withPlugin('kotlin-kapt') {
+        kapt {
+            useBuildCache = true
+            // https://github.com/google/dagger/issues/1449#issuecomment-495404186
+            javacOptions {
+                option '-source', '8'
+                option '-target', '8'
+            }
+        }
+    }
+
+    if (name == 'test') {  //Need to place your main module name
+        apply plugin: 'com.android.application'
+    } else {
+        apply plugin: 'com.android.library'
+        android.libraryVariants.all { variant ->
+            variant.generateBuildConfigProvider.configure { enabled = false }
+        }
+    }
+
+    android {
+        compileSdkVersion versions.compileSdk
+        buildToolsVersion = versions.buildTools
+        defaultConfig {
+            minSdkVersion versions.minSdk
+            targetSdkVersion versions.targetSdk
+            versionCode versions.versionCode
+            versionName versions.versionName
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+        testOptions.unitTests.all {
+            testLogging {
+                events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            }
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << '-Xlint:unchecked'
+        options.deprecation = true
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
+
+    detekt {
+        config = rootProject.files('detekt-config.yml')
+        baseline = project.file('detekt-baseline.xml')
+        parallel = true
+    }
+
+    afterEvaluate {
+        project.tasks.getByName('check').dependsOn 'detekt'
+    }
 }
+
+apply from: rootProject.file('spotless.root.gradle')
+
+tasks {
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
+    }
+}
+
+task installHook(type: Copy) {
+    from 'ci'
+    into rootProject.file('.git/hooks/')
+    rename('pre-push-recommended.sh', 'pre-push')
+    fileMode 0755
+}
+
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+}
+

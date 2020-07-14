@@ -7,8 +7,7 @@ Demonstrates the integration of the SafeHouse service through the usage of SafeH
 Introduction
 ============
 
-This sample shows a simple way of getting a secure vpn connection, by using a dedicated safehouse widget.
-The SafeHouseConnectionButton is easily used by integrating the button into an app's xml layout.
+This sample shows a simple way of getting a secure vpn connection, by using a dedicated safehouse library.
 Through simple steps, the service can be integrated.
 
 Permissions for the Vpn will be requested upon tapping the connect button.
@@ -29,73 +28,88 @@ Than, open it in Android Studio and follow the example code in the main activity
 Then, go through the following steps in order to get the example working
 (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
-0. take the sdk the resides inside the libs/ folder in the example code
+0. take the sdk wireguard_sdk which resides inside the libs/ folder in the example code
+1. Add the following files to your project at root folder as shown in this example
+   dependencies.gradle
+   spotless.gradle
+   spotless.license
+   spotless.root.gradle
 
-1. Android manifest: add the following 
+2. Modify your application/project gradle to the gradle as shown in this example. Also, change your main module name at line 49 in Project Gradle.
 
-  1.tools:replace="android:allowBackup,android:icon,android:label,android:theme" (**in case of xml merging errors**:)
-  
-  2.Add the following permision:
-  
-   uses-permission android:name="android.permission.FOREGROUND_SERVICE"
+3. Remove apply plugin: 'com.android.application' from your main gradle as same already been implemented in new project gradle.
 
-2. module build.gradle
+4. Android manifest: add the following
+
+  1. tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:name" (**in case of xml merging errors**:)
+
+
+5. module build.gradle
 add the following dependencies:
 
 dependencies {
 //under libs folder we will put the sdk as an aar library
-implementation fileTree(dir: 'libs', include: ['*.jar,*.aar'])
+ implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 //add the dependency to the safehouseLib-release@aar
- implementation(':safehouseLib-release_latest@aar'){transitive=true}
+  implementation files('libs/wireguard_sdk.aar')
 
 //add the dependencies below (temporary and will be remove shortly)
-implementation("androidx.appcompat:appcompat:1.1.0")
-implementation("androidx.annotation:annotation:1.1.0'")
-implementation("androidx.cardview:cardview:1.0.0")
-implementation("androidx.constraintlayout:constraintlayout:1.1.3")
-implementation("androidx.core:core-ktx:+")
-implementation("com.jakewharton.timber:timber:4.7.1")
-implementation("com.google.firebase:firebase-messaging:20.1.0")
-implementation("com.contrarywind:Android-PickerView:4.1.8")
+implementation 'androidx.appcompat:appcompat:1.1.0'
+implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+testImplementation 'junit:junit:4.12'
+androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+implementation 'com.contrarywind:Android-PickerView:4.1.8'
+implementation 'com.google.android.material:material:1.1.0-alpha09'
 
 
 3. To access VPN feature, please follow the below mentioned steps:
 
-  //Initialise SafeHouseConnectionButton object.
+  //Extend your Application class to com.wireguard.android.SafeHouseSDK.Application.
   
-  SafeHouseConnectionButton safeHouseConnectionButton = new SafeHouseConnectionButton(context);
+  public class Master extends Application
   
-  //Register callback to recieve VPN status
+  //Call SafeHouse SDK init
   
-  safeHouseConnectionButton.registerToSafeHouseVpnStatus(SafeHouseConnectionCallbacks). After this you will find runtime VPN     Connection status like LEVEL_CONNECTED, LEVEL_NOTCONNECTED and so on. 
+  SafeHouseSDK.init(getApplicationContext(), BuildConfig.APPLICATION_ID, BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
   
-  //This method is used to find all available country
+  //Extend your activity with com.wireguard.android.activity.BaseActivity
   
-   getAllAvailableServerLocation();
+   MainActivity extends BaseActivity
 
-  //This method is used to pass the user selection location to the sdk.
+  //Implement SafeHouseConnectionCallback on your Activity. You will receive override methods of it. Also, register this callback on onCreate.
   
-   setAvailableLocation(getAllAvailableServerLocation().get(0));
+   onVPNConnect, onVPNDisconnect, onConnectionError
+
+   OnCreate(){registerToSafeHouseVpnStatus(this)}
+
    
    Note: It's necessay to pass any location before start VPN connection.
    
-   //Check if VPN is alreadyConnected
+   //To Check if VPN is alreadyConnected
    
    isVPNConnected()
    
    //To connect VPN
 
-   connectToVPN()
+   connectVPN()
    
    //To disconnect VPN
    
-   disconnectVPNConnection()
-   
-   // To retry
-   
-   retryConnection()
+   disconnectVPN()
+
+  //To get Server regions.
+
+  getServerRegions()
+
+
+   //To set Server region
+
+    setServerRegion(serverRegion)
   
+Note: You may need to change your app folder to some other name.
+      For Server regions we simplified it to 2 regions for now due to security concerns.
 
 Known issues
 ------------
