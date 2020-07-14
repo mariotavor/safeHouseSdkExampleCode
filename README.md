@@ -1,4 +1,4 @@
-safeHouse sdk library version 1.25
+safeHouse sdk library version
 ==================================
 
 Demonstrates the integration of the SafeHouse service through the usage of SafeHouse sdk library.
