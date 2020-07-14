@@ -109,6 +109,8 @@ implementation 'com.google.android.material:material:1.1.0-alpha09'
     setServerRegion(serverRegion)
   
 Note: You may need to change your app folder to some other name.
+
+
       For Server regions we simplified it to 2 regions for now due to security concerns.
 
 Known issues
