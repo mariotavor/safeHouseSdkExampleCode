@@ -1,4 +1,4 @@
-safeHouse sdk library version
+safeHouse sdk library
 ==================================
 
 Demonstrates the integration of the SafeHouse service through the usage of SafeHouse sdk library.
