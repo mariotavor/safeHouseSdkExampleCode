@@ -46,31 +46,52 @@ dependencies {
 //under libs folder we will put the sdk as an aar library
  implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-//add the dependency to the safehouseLib-release@aar
+//add the following AAR dependency
    api files('libs/app.aar')
+
    api files('libs/util.aar')
+
    api files('libs/crypto.aar')
+
    api files('libs/config.aar')
+
    api files('libs/native.aar')
 
 //add the dependencies below (temporary and will be remove shortly)
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
+
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
+
     implementation "androidx.core:core-ktx:1.3.0-alpha01"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61"
+
     implementation 'androidx.slice:slice-builders:1.1.0-alpha01'
+
     implementation 'androidx.slice:slice-builders-ktx:1.0.0-alpha07'
+
     implementation 'androidx.slice:slice-core:1.1.0-alpha01'
+
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+
     api 'com.squareup.retrofit2:retrofit:2.9.0'
+
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
+
     api 'com.jakewharton.threetenabp:threetenabp:1.2.2'
+
     implementation 'androidx.multidex:multidex:2.0.1'
+
     implementation 'javax.inject:javax.inject:1'
+
     implementation 'androidx.annotation:annotation:1.1.0'
+
     implementation 'com.google.dagger:dagger:2.26'
+
     kapt 'com.google.dagger:dagger-compiler:2.26'
 
 
@@ -125,8 +146,6 @@ dependencies {
   
 Note: You may need to change your app folder to some other name.
 
-
-      For Server regions we simplified it to 2 regions for now due to security concerns.
 
 Known issues
 ------------
