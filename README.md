@@ -23,28 +23,23 @@ Getting Started
 ---------------
 
 First and foremost, download this git repo example code.
-Than, open it in Android Studio and follow the example code in the main activity.
+Then, open it in Android Studio and follow the example code in the main activity.
 
 Then, go through the following steps in order to get the example working
 (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
-0. take the sdk wireguard_sdk which resides inside the libs/ folder in the example code
-1. Add the following files to your project at root folder as shown in this example
-   dependencies.gradle
-   spotless.gradle
-   spotless.license
-   spotless.root.gradle
+0. take the following AAR which resides inside the libs/ folder in the example code
+   app, config, crypto, native, util
 
-2. Modify your application/project gradle to the gradle as shown in this example. Also, change your main module name at line 49 in Project Gradle.
 
-3. Remove apply plugin: 'com.android.application' from your main gradle as same already been implemented in new project gradle.
+1. Modify your application/project gradle to the gradle as shown in this example.
 
-4. Android manifest: add the following
+2. Android manifest: add the following
 
   1. tools:replace="android:allowBackup,android:icon,android:label,android:theme,android:name" (**in case of xml merging errors**:)
 
 
-5. module build.gradle
+3. module build.gradle
 add the following dependencies:
 
 dependencies {
@@ -52,16 +47,31 @@ dependencies {
  implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 //add the dependency to the safehouseLib-release@aar
-  implementation files('libs/wireguard_sdk.aar')
+   api files('libs/app.aar')
+   api files('libs/util.aar')
+   api files('libs/crypto.aar')
+   api files('libs/config.aar')
+   api files('libs/native.aar')
 
 //add the dependencies below (temporary and will be remove shortly)
-implementation 'androidx.appcompat:appcompat:1.1.0'
-implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-testImplementation 'junit:junit:4.12'
-androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-implementation 'com.contrarywind:Android-PickerView:4.1.8'
-implementation 'com.google.android.material:material:1.1.0-alpha09'
+    implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
+    implementation "androidx.core:core-ktx:1.3.0-alpha01"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61"
+    implementation 'androidx.slice:slice-builders:1.1.0-alpha01'
+    implementation 'androidx.slice:slice-builders-ktx:1.0.0-alpha07'
+    implementation 'androidx.slice:slice-core:1.1.0-alpha01'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.jakewharton.threetenabp:threetenabp:1.2.2'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'com.google.dagger:dagger:2.26'
+    kapt 'com.google.dagger:dagger-compiler:2.26'
 
 
 3. To access VPN feature, please follow the below mentioned steps:
@@ -79,13 +89,19 @@ implementation 'com.google.android.material:material:1.1.0-alpha09'
    MainActivity extends BaseActivity
 
   //Implement SafeHouseConnectionCallback on your Activity. You will receive override methods of it. Also, register this callback on onCreate.
-  
+
    onVPNConnect, onVPNDisconnect, onConnectionError
 
    OnCreate(){registerToSafeHouseVpnStatus(this)}
 
+   //Implement SafeHouseGetServersCallBack on your Activity in order to fetch list of available Servers. Also, register this callback on onCreate.
+
+    onGetRegionSuccessfully, onGetRegionError
+
+    OnCreate(){registerToSafeHouseServerStatus(this)}
+
    
-   Note: It's necessay to pass any location before start VPN connection.
+   Note: It's necessay to set Region before start VPN connection. You will get Region list on onGetRegionSuccessfully callback.
    
    //To Check if VPN is alreadyConnected
    
@@ -101,8 +117,7 @@ implementation 'com.google.android.material:material:1.1.0-alpha09'
 
   //To get Server regions.
 
-  getServerRegions()
-
+   getServerRegions()
 
    //To set Server region
 
