@@ -155,5 +155,6 @@ Known issues
 Screenshot
 ----------
 
-![2020-04-01](https://user-images.githubusercontent.com/27682184/78152594-a6f0d800-7457-11ea-81f9-dbba94163788.jpg)
+![2020-09-14](https://user-images.githubusercontent.com/27682184/93109160-530a4080-f6d1-11ea-9d65-0cba347999bd.jpg)
+
   
