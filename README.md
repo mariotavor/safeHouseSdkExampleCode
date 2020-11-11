@@ -8,7 +8,6 @@ Introduction
 ============
 
 This sample shows a simple way of getting a secure vpn connection, by using a dedicated safehouse library.
-Through simple steps, the service can be integrated.
 
 Permissions for the Vpn will be requested upon tapping the connect button.
 
@@ -29,7 +28,7 @@ Then, go through the following steps in order to get the example working
 (Please note that we are currently in optimization phases and therefore some of the next steps are temporary and will be change promtly).
 
 0. take the following AAR which resides inside the libs/ folder in the example code
-   app, config, crypto, native, util
+   app, native
 
 
 1. Modify your application/project gradle to the gradle as shown in this example.
@@ -49,20 +48,12 @@ dependencies {
 //add the following AAR dependency
    api files('libs/app.aar')
 
-   api files('libs/util.aar')
-
-   api files('libs/crypto.aar')
-
-   api files('libs/config.aar')
-
    api files('libs/native.aar')
 
 //add the dependencies below (temporary and will be remove shortly)
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.1'
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
-
-    implementation 'com.contrarywind:Android-PickerView:4.1.8'
 
     implementation "androidx.core:core-ktx:1.3.0-alpha01"
 
