@@ -46,6 +46,7 @@ dependencies {
  implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 //add the following AAR dependency
+
    api files('libs/app.aar')
 
    api files('libs/native.aar')
